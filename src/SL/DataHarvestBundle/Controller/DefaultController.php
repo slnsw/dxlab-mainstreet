@@ -5,9 +5,10 @@
 namespace SL\DataHarvestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DomCrawler\Crawler;
 use SL\DataHarvestBundle\Entity\Data;
-use SL\DataHarvestBundle\Resources\Helpers\Data as Helper;
+use SL\DataHarvestBundle\Resources\Helpers\Trove as Trove_Helper;
 
 class DefaultController extends Controller
 {
@@ -42,9 +43,11 @@ class DefaultController extends Controller
             'tag' => 'main street',
         );
         if($objects = ($api->getObjectsFromAccount($params))){
-            $contents = file_get_contents(__DIR__ . '/data.php');
-            $objects = unserialize($contents);
+            // Uncomment the following lines to use static data for debugging. Quicker than making a request to the API.
+            // $contents = file_get_contents(__DIR__ . '/data.php');
+            // $objects = unserialize($contents);
             $model = $this->getDoctrine()->getManager();
+            $output =& $objects;
             $count = 0;
             foreach($objects as $object){
                 $data = new Data();
@@ -78,8 +81,8 @@ class DefaultController extends Controller
                 $model->persist($data);
             }
             $model->flush();
-            $response = new JsonResponse();
-            $response->setData($objects);
+            $response = new Response($output);
+            $response->headers->set('Content-type', 'application/json');
             return $response;
         }
     }
@@ -92,13 +95,33 @@ class DefaultController extends Controller
 
     private function _harvestTROVE()
     {
-        if(TRUE){
-        }
-        $data = new Data();
+        $params = array(
+            'paths' => array(
+                'key=***REMOVED***&q=main street date:[1910 TO 1920]&zone=newspaper&include=tags,workversions&reclevel=full&l-title=35&n=100',
+            ),
+            'max' => 100,
+        );
+        $helper = new Trove_Helper();
         $model = $this->getDoctrine()->getManager();
-        $model->persist($data);
+        if($objects = ($helper->getObjects($params))){
+            $output = '';
+            $crawler = new Crawler();
+            $data = new Data();
+            foreach($objects as $object){
+                $crawler->addContent($object);
+                $output .= $object;
+                foreach($crawler->filterXPath('//records')->children() as $record){
+                    $data->setTitle($record->getElementsByTagName('heading')->item(0)->nodeValue);
+                    $data->setDescription($record->getElementsByTagName('snippet')->item(0)->nodeValue);
+                    $data->setDate(new \DateTime($record->getElementsByTagName('date')->item(0)->nodeValue));
+                    $data->setSource($record->getElementsByTagName('trovePageUrl')->item(0)->nodeValue);
+                }
+                $model->persist($data);
+            }
+        }
         $model->flush();
-        $response = new JsonResponse();
-        $response->setData($objects);
+        $response = new Response($output);
+        $response->headers->set('Content-type', 'text/xml');
+        return $response;
     }
 }
