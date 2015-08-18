@@ -1,0 +1,3 @@
+sl_harvest_index:
+    path:     /harvest/{name}
+    defaults: { _controller: SLDataHarvestBundle:Default:harvest }
