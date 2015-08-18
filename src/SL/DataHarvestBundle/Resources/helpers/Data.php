@@ -6,6 +6,6 @@ class Data
 {
 
     public function __construct(){
-
     }
+
 }
