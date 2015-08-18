@@ -168,7 +168,7 @@ class Data
      * Get source
      *
      * @return string
-     */s
+     */
     public function getSource()
     {
         return $this->source;
