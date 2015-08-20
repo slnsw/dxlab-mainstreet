@@ -39,7 +39,7 @@ class Data
     protected $media;
 
     /**
-    * @ORM\Column(type="string")
+    * @ORM\Column(type="string", length=55)
     */
     protected $source;
 
@@ -47,6 +47,17 @@ class Data
     * @ORM\Column(type="datetime", nullable=true)
     */
     protected $date;
+
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $url;
+
+    /**
+    * @ORM\Column(type="blob", nullable=true)
+    */
+    protected $data;
+
 
 
     /**
@@ -195,5 +206,51 @@ class Data
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Data
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set data
+     *
+     * @param string $data
+     * @return Data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return string
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 }
