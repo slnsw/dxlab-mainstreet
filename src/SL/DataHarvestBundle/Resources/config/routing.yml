@@ -1,3 +1,9 @@
 sl_harvest_index:
-    path:     /harvest/{name}
+    path:     /harvest/{source}
     defaults: { _controller: SLDataHarvestBundle:Default:harvest }
+sl_fetch_index:
+    path:     /fetch/{source}
+    defaults: { _controller: SLDataHarvestBundle:Default:fetch }
+sl_filter_tags_index:
+    path:     /filter_tags/{year}
+    defaults: { _controller: SLDataHarvestBundle:Default:filterTags }
