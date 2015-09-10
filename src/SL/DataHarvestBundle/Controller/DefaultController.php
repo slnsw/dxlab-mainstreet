@@ -117,7 +117,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * A method acting as a harvesting handler for the eHive service.
+     * A method acting as a harvesting handler for the Trove service.
      *
      * @return object | $response
      */
@@ -126,10 +126,10 @@ class DefaultController extends Controller
     {
         $params = array(
             'paths' => array(
-                "key=g7jcpc3coas4e7qs&q={$this->_searchTerm} date:[1910 TO 1920]&zone=newspaper&include=tags,workversions&reclevel=full&l-title=35",
-                "key=g7jcpc3coas4e7qs&q={$this->_searchTerm} date:[1910 TO 1920]&zone=newspaper&include=tags,workversions&reclevel=full&l-title=1007",
+                "q={$this->_searchTerm} date:[1850 TO 1955]&zone=newspaper&include=tags,workversions&reclevel=full&l-title=1007",
+                "q={$this->_searchTerm} date:[1850 TO 1955]&zone=newspaper&include=tags,workversions&reclevel=full&l-title=35",
             ),
-            'max' => 100,
+            'max' => 8000,
         );
         $output = '';
         $model = $this->getDoctrine()->getManager();
@@ -162,7 +162,7 @@ class DefaultController extends Controller
                         $data = new Data();
                         $data->setTitle($record->getElementsByTagName('heading')->item(0)->nodeValue);
                         $data->setDescription($record->getElementsByTagName('snippet')->item(0)->nodeValue);
-                        $data->setData(serialize(array('title' => $record->getElementsByTagName('title')->item(0)->nodeValue)));
+                        $data->setData(serialize(array('title' => $record->getElementsByTagName('title')->item(0)->getAttribute('id'))));
                         $data->setDate(new \DateTime($record->getElementsByTagName('date')->item(0)->nodeValue));
                         $data->setUrl($record->getElementsByTagName('trovePageUrl')->item(0)->nodeValue);
                         $data->setSource('trove');
@@ -228,41 +228,96 @@ class DefaultController extends Controller
 
     public function filterTagsAction($year)
     {
+        $request = $this->get('request');
+        $format = (!is_null($request->get('xml')) ? 'xml' : 'json');
         $helper = new Trove_Helper();
-        $end = ($year + 10);
-        $start = new \DateTime('01-01-' . $year);
-        $end = new \DateTime('01-01-' . (string)$end);
         $model = $this->getDoctrine()->getManager();
         $repository = $model->getRepository('SLDataHarvestBundle:Data');
         $query = $repository->createQueryBuilder('d');
-        $query->where('d.date >= :start')
-              ->andWhere('d.date <= :end')
-              ->andWhere('d.source = :source')
-              ->setParameters(array(
-                    'start' => $start->format('c'),
-                    'end' => $end->format('c'),
-                    'source' => 'trove',
-                ));
+        if($year != 'all'){
+            $end = ($year + 10);
+            $start = new \DateTime('01-01-' . (string)$year);
+            $end = new \DateTime('01-01-' . (string)$end);
+            $query->where('d.date >= :start')
+                  ->andWhere('d.date <= :end')
+                  ->setParameters(array(
+                        'start' => $start->format('c'),
+                        'end' => $end->format('c'),
+                    ));
+        }
+        $query->andWhere('d.source = :source')
+              ->setParameter('source', 'trove')
+              ->orderBy('d.date', 'ASC');
         $store = array();
-        $output = '';
+        $output = array();
+        unset($start, $end);
         if($objects = ($query->getQuery()->getArrayResult())){
             foreach($objects as $object){
-                $store[$object['date']->format('Y')][] = $object;
+                $data = stream_get_contents($object['data']);
+                $source = unserialize($data);
+                $store[$source['title']][$object['date']->format('Y')][] = $object;
             }
+            // The sort is performed to ensure the 'Tweed Daily' set of newspaper tags are returned first, ideally this should be delegated to a user defined sort.
+            krsort($store);
             if(!empty($store)){
-                foreach($store as $k => $v){
-                    $text = '';
-                    $v = array_walk($v, function($value, $key) use (&$text){
-                        $text .= $value['description'];
-                    });
-                    if(strlen($text) > 0){
-                        $output = $helper::extractCommonWords($text);
+                $document = new \DomDocument();
+                $document->formatOutput = TRUE;
+                $document->loadXML('<root></root>');
+                foreach($store as $k => $title){
+                    $source = $document->createElement('source');
+                    $source->setAttribute('id', $k);
+                    $output[$k] = explode(' ', $this->_searchTerm);
+                    foreach($title as $k1 => $date){
+                        $text = '';
+                        array_walk($date, function($value, $key) use (&$text){
+                            $text .= $value['description'];
+                        });
+                        if(!isset($start)
+                            || is_object($start)){
+                            $start = $k1;
+                        }
+                        $end = $k1;
                     }
+                    $start = new \DateTime('01-01-' . (string)$start);
+                    $end = new \DateTime('01-01-' . (string)$end);
+                    if(strlen($text) > 0){
+                        $output[$k] = $helper::extractCommonWords($text, 15);
+                        if(!empty($output[$k])){
+                            foreach($output[$k] as $k1 => &$v1){
+                                $count = $v1;
+                                $path = $helper->generateTagPath($k1, 'newspaper', array(
+                                        'date' => '[' . $start->format('Y') . ' TO ' . $end->format('Y') . ']',
+                                        'l-title' => $k,
+                                    ));
+                                $v1 = array('count' => $count, 'path' => $path);
+                                $tag = $document->createElement('tag');
+                                $title = $document->createElement('title', $k1);
+                                $tag->appendChild($title);
+                                $count = $document->createElement('count', $count);
+                                $tag->appendChild($count);
+                                $path = $document->createElement('path', htmlspecialchars(strip_tags($path)));
+                                $tag->appendChild($path);
+                                $source->appendChild($tag);
+                            }
+                        }
+                    }
+                    $document->documentElement->appendChild($source);
                 }
             }
         }
-        $response = new Response(json_encode($output));
-        $response->headers->set('Content-type', 'application/json');
+        $response = new Response();
+        switch($format){
+            case 'xml':
+                $response->headers->set('Content-type', 'text/xml');
+                $output = $document->saveXML();
+                break;
+            case 'json':
+                $response->headers->set('Content-type', 'application/json');
+                $output = 'jsonpResponse(' . json_encode($output) . ');';
+            default:
+            break;
+        }
+        $response->setContent($output);
         return $response;
     }
 
