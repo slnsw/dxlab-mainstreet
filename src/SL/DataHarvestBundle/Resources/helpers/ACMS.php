@@ -1,6 +1,6 @@
 <?php
 
-namespace SL\DataHarvestBundle\Resources\Helpers;
+namespace SL\DataHarvestBundle\Resources\helpers;
 
 class ACMS
 {

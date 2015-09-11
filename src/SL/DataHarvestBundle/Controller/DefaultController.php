@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\DomCrawler\Crawler;
 use SL\DataHarvestBundle\Entity\Data;
-use SL\DataHarvestBundle\Resources\Helpers\Trove as Trove_Helper;
-use SL\DataHarvestBundle\Resources\Helpers\ACMS as ACMS_Helper;
+use SL\DataHarvestBundle\Resources\helpers\Trove as Trove_Helper;
+use SL\DataHarvestBundle\Resources\helpers\ACMS as ACMS_Helper;
 
 class DefaultController extends Controller
 {
