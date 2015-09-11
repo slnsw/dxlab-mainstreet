@@ -7,7 +7,7 @@ define('CLIENT_SECRET', '0a5ba3bd2d3a4bb3a80d6c77f9d50edb');
 define('TRACKING_ID', 'af8c26c760dc49c3a5869d4a390c6407');
 
 require_once(EHIVE_API_ROOT_DIR . '/sl/Transport.php');
-require_once(EHIVE_API_ROOT_DIR . '/dao/DAOHelper.php');
+require_once(EHIVE_API_ROOT_DIR . '/dao/DaoHelper.php');
 
 class EHive
 {
