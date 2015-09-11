@@ -7,6 +7,9 @@
 !app/logs/.gitkeep
 /app/phpunit.xml
 /build/
-/vendor/
+!vendor/
+vendor/*
+!vendor/ehive/
+!vendor/zebra_curl/
 /bin/
 /composer.phar
