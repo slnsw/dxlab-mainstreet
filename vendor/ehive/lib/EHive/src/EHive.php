@@ -7,7 +7,7 @@ define('CLIENT_SECRET', '***REMOVED***');
 define('TRACKING_ID', '***REMOVED***');
 
 require_once(EHIVE_API_ROOT_DIR . '/sl/Transport.php');
-require_once(EHIVE_API_ROOT_DIR . '/dao/DAOHelper.php');
+require_once(EHIVE_API_ROOT_DIR . '/dao/DaoHelper.php');
 
 class EHive
 {
