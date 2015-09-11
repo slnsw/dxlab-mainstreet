@@ -5,7 +5,8 @@ namespace SL\DataHarvestBundle\Resources\helpers;
 class Trove
 {
 
-    private $_data;
+    private $_data = array();
+    private $_errors = array();
 
     const TROVE_SEARCH_API_PATH = 'http://api.trove.nla.gov.au/result';
     const TROVE_SEARCH_NEWSPAPER_PATH = 'http://trove.nla.gov.au/newspaper/result';
@@ -26,22 +27,17 @@ class Trove
             $paths[] = $path . '&n=100&s=' . ($i * 100);
           }
         }
+        // Increase the number of threads/requests that the library will process asyncronously at any one time.
+        $zebra->threads = 30;
+        $zebra->pause_interval = 1;
         // Increase the overall timeout for the connection, due to the large number of concurrent and recursive requests this is advisable.
         $zebra->option(array(
-          CURLOPT_CONNECTTIMEOUT => 30,
-          CURLOPT_TIMEOUT => 40,
+          CURLOPT_CONNECTTIMEOUT => 50,
+          CURLOPT_TIMEOUT => 70,
           ));
-        // Group the paths into chunks.
-        $paths = array_chunk($paths, 20);
-        $exp = 0;
-        // Iterate through the groups and process the paths contained in each, recording the total number of paths for cross-reference.
-        foreach($paths as $set){
-          $exp += count($set);
-          $zebra->get($set, array($this, 'processObjects'));
-          usleep(100000);
-        }
+        $zebra->get($paths, array($this, 'processObjects'));
         // If the number of results does not reflect the total number of paths continue to loop.
-        while(count($this->_data['results']) < $exp){
+        while(count($this->_data['results']) < count($paths)){
           continue;
         }
         // Once we have the complete data set containing the Zebra_cURL response body's, return ensuring any failed responses are filtered out.
@@ -65,8 +61,10 @@ class Trove
 
     public function processObjects($result)
     {
-        if(!$result->body){
-          $this->_errors[] = implode(', ', $result->response);
+        if(!$result->body
+            || $result->info['http_code'] != 200){
+          $this->_errors[] = array_merge($result->response, $result->info);
+          $result->body = '';
         }
         $this->_data['results'][] = $result->body;
     }
