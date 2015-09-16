@@ -16,6 +16,11 @@ class DefaultController extends Controller
 
     private $_searchTerm = 'main street';
 
+    public function indexAction()
+    {
+        return $this->render('SLDataHarvestBundle:Default:index.html.twig');
+    }
+
     /**
      * The primary method responsible for handling the page callback, delegating control to the necessary handlers for harvesting the data from various sources. The handlers are private methods suffixed with an uppercase service name.
      *

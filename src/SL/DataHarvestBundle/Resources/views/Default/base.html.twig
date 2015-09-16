@@ -1,0 +1,41 @@
+{% set assetPath = 'bundles/sldataharvest' %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+     <meta charset="utf-8">
+     <title>Mainstreet NSW 1867 - 1950</title>
+     {% stylesheets
+     'bundles/sldataharvest/css/mainstreet-rm.css'
+     'bundles/sldataharvest/css/mainstreet-bigscreen.css' filter='cssrewrite' %}
+     <link rel="stylesheet" href="{{ asset_url }}" />
+     {% endstylesheets %}
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <script src="http://requirejs.org/docs/release/2.1.11/minified/require.js"></script>
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+     {% include 'SLDataHarvestBundle:Default:init.html.twig' %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        <script type="text/underscore" id="tags">
+        <h2><%= name %></h2>
+            <% _.each(tags, function(title, key, list){ %>
+                <div class="trove-<%= key %>">
+                <% _.each(title, function(obj, tag, list){ %>
+                    <%
+                   // Ensures the font is higher than 1em but not higher than 3. Finds the nearest highest power of 2 relative to the number of occurences for each word.
+                   var font = ((parseInt(nearestPow(obj.count, 2)) / 15) + 1);
+                   font = (font > 5 ? 5: font);
+                   %>
+                    <span style="font-size: <%= font %>em;"><a href="<%= obj.path %>"><%= tag %></a> </span>
+                <% }); %>
+                </div>
+            <% }); %>
+        </script>
+        {% javascripts
+        '@SLDataHarvestBundle/Resources/public/js/underscore.min.js'
+        '@SLDataHarvestBundle/Resources/public/js/mousestop.min.js'
+        '@SLDataHarvestBundle/Resources/public/js/core.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    </body>
+</html>

@@ -1,1 +1,34 @@
-Hello {{ name }}!
+{% extends 'SLDataHarvestBundle:Default:base.html.twig' %}
+{% block body %}
+<div id="pagewrapper">
+<div id="tweed"></div>
+<div id ="tags-wrapper"></div>
+<div id ="title-center">
+   <h1>Main street</h1>
+</div>
+<div id="sydney"></div>
+</div>
+<div id="menu">
+<h3><a href="#" onclick="resetpage();">Reset</a></h3>
+<a href="#" onclick="openinfo();"><img class="info" src="{{ assetPath ~ '/images/info.png' }}" alt="About Main Street"/></a>
+</div>
+<div id="infolayer" class="infolayer-off">
+<div class="closewindow"><a href="#" onclick="closeinfo();"><img class="info" src="{{ assetPath ~ '/images/closewindow.png' }}"/> Close window</a></div>
+<div class="about">
+   <div class="about-left">
+      <p id="desc"> Main Street is the result of a collaborative project between the <a href="http://dxlab.sl.nsw.gov.au" target="_blank">DX Lab</a> and the <a href="http://museum.tweed.nsw.gov.au/" target="_blank">Tweed Regional Museum</a>. It is the result of a two week ‘<a href="http://dxlab.sl.nsw.gov.au/digital-drop-in/" target="_blank">digital drop-in</a>’
+         program run by the Lab that supports creative and innovative projects. Erika Taylor, Curator of the Tweed Regional Museum, worked with Lab developers for two weeks, to develop the concept and the first iteration of Main Street.
+      </p>
+      <p>This interface explores how the collection at The Library can be used in conjunction with a NSW regional collection, to provide a digital experience that explores both collections comparatively.</p>
+      <p>Main Street uses 100 images of ‘Main Streets’ from the Tweed Regional Museum Collection (running on top of the page) and compares them to 100 images of ‘Sydney Main Streets’ from The Library Collection (bottom of page). The data sets are organised in sequential order ranging from the 1880s to 1950s. The middle of the page shows common words from newspapers of that year, the Sydney Morning Herald and the Tweed Daily. </p>
+      <p>The project uses three cultural heritage API’s including <a href="http://developers.ehive.com/rest-api-overview/" target="_blank">eHive</a>, <a href="http://help.nla.gov.au/trove/building-with-trove/api"target="_blank">Trove</a> and <a href="http://www.sl.nsw.gov.au/using/search/open_data.html" target="_blank">The Library</a>. The project documentation, and resulting code is available on <a href="https://github.com/slnsw-webdev" target="_blank">Github</a>.</p>
+      <p>This project is supported by <a href="http://mgnsw.org.au/sector/funding/grants-we-administer/placement-programs/" target="_blank">Arts NSW’s Mentorship, Fellowship and Volunteer Placement Program</a> and devolved funding program administered by Museums and Galleries NSW on behalf of the NSW Government.</p>
+      <p>Contact us: <a href="mailto:dxlab@sl.nsw.gov.au">dxlab@sl.nsw.gov.au</a></p>
+   </div>
+   <div class="about-right">
+      <p class="about-logo">AN EXPERIMENT BY <a target="_blank" href="http://dxlab.sl.nsw.gov.au/"><img src="{{ assetPath ~ '/images/DX_Lab_Logo_V2_Dash.png' }}" id="dx-logo"></a></p>
+      <p class="about-logo">POWERED BY <a target="_blank" href="http://www.sl.nsw.gov.au" target="_blank"><img src="{{ assetPath ~ '/images/sl_logo.png' }}" id="sl-logo"></a></p>
+   </div>
+</div>
+</div>
+{% endblock %}
