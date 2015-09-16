@@ -50,22 +50,17 @@ padding: 0 0 0 0.2em;
 		
 	}
 	
-.about .about-left {
-    width: calc(50% - 50px);
-}
-.about .about-right {
-    width: calc(50% - 50px);
-}
-.about .about-right .about-logo #sl-logo {
-    margin-left: calc(25% - 53px);
-    
-}
+
 		}
 
 		@media (min-width: 1125px)  {
   
 #title-center h1 {font-size: 10em;
 }
+		}
+		
+		@media (min-width: 1235px)  {
+			
 		}
 		
 		@media (min-width: 1350px)  {
@@ -79,6 +74,17 @@ padding: 0 0 0 0.2em;
     width: 60%;
 		
 	}
+	
+.about .about-left {
+    width: calc(50% - 50px);
+}
+.about .about-right {
+    width: calc(50% - 50px);
+}
+.about .about-right .about-logo #sl-logo {
+    margin-left: calc(25% - 53px);
+    
+}
 		}
 
 		@media (min-width: 1700px)  {
