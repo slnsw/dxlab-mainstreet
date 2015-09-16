@@ -1,0 +1,90 @@
+@charset "UTF-8";
+/* CSS Document */
+
+		@media (min-width: 500px)  {
+  
+#title-center h1 {
+font-size: 6em;
+
+}
+
+		@media (min-width: 670px)  {
+  
+#title-center h1 {
+font-size: 8em;
+
+}
+.about .about-left {
+width: calc(60% - 50px);
+}
+.about .about-right {
+width: calc(40%);
+}
+
+		@media (min-width: 785px)  {
+  
+#title-center h1 {
+/*font-size: 8em;*/
+letter-spacing: 0.2em;
+padding: 0 0 0 0.2em;
+}
+
+		@media (min-width: 900px)  {
+  
+#title-center h1 {
+	letter-spacing: 0.3em;
+	padding: 0 0 0 0.3em;
+}
+		}
+		@media (min-width: 1015px)  {
+  
+#title-center h1 {font-size: 9em;
+}
+		}
+		@media (min-width: 1100px)  {
+  
+#infolayer {
+    left: 15%;
+    top: 10%;
+    width: 70%;
+		
+	}
+	
+.about .about-left {
+    width: calc(50% - 50px);
+}
+.about .about-right {
+    width: calc(50% - 50px);
+}
+.about .about-right .about-logo #sl-logo {
+    margin-left: calc(25% - 53px);
+    
+}
+		}
+
+		@media (min-width: 1125px)  {
+  
+#title-center h1 {font-size: 10em;
+}
+		}
+		
+		@media (min-width: 1350px)  {
+  
+#title-center h1 {font-size: 12em;
+}
+
+#infolayer {
+    left: 20%;
+    top: 15%;
+    width: 60%;
+		
+	}
+		}
+
+		@media (min-width: 1700px)  {
+  
+#title-center h1 {font-size: 15em;
+}
+		}
+		
+		
