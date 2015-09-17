@@ -234,7 +234,7 @@ class DefaultController extends Controller
     public function filterTagsAction($year)
     {
         $request = $this->get('request');
-        $format = (!is_null($request->get('xml')) ? 'xml' : 'json');
+        $format = (!is_null($request->get('xml')) ? 'xml' : 'jsonp');
         $helper = new Trove_Helper();
         $model = $this->getDoctrine()->getManager();
         $repository = $model->getRepository('SLDataHarvestBundle:Data');
@@ -310,15 +310,16 @@ class DefaultController extends Controller
                 }
             }
         }
+        $callback = $request->get('callback');
         $response = new Response();
         switch($format){
             case 'xml':
                 $response->headers->set('Content-type', 'text/xml');
                 $output = $document->saveXML();
                 break;
-            case 'json':
+            case 'jsonp':
                 $response->headers->set('Content-type', 'application/json');
-                $output = 'jsonpResponse(' . json_encode($output) . ');';
+                $output = $callback . '(' . json_encode($output) . ');';
             default:
             break;
         }

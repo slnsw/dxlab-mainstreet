@@ -1,10 +1,19 @@
+// Define our global variables.
+var cache = new Array();
+var getArr = new Array();
+
 // A placeholder callback function for jsonp response. Triggered automatically upon response when performing an ajax call marked with a response of type jsonp.
-function jsonpResponse(response){}
+window.jsonpCallback = function(response, date, section){
+    cache[section] = new Array();
+    cache[section]['date'] = date;
+    cache[section]['section'] = section;
+    cache[section]['tags'] = response;
+    getArr[section].resolve();
+};
+
+window.jsonpCallbacks = {};
 
 (function($, w, d){
-    // Define our global variables.
-    var cache = new Array();
-    var getArr = new Array();
     var sections = new Array();
     var regex  = /([0-9]{4})/;
     // Initiate the setup upon document load.
@@ -39,9 +48,9 @@ function jsonpResponse(response){}
             for(i = 0; i < sections.length; i++){
                 (function(i){
                     var deferred = new $.Deferred();
-                    setTimeout(function(){
-                        getTags(sections[i], i);
-                    }, i * 1500);
+                    // setTimeout(function(){
+                    getTags(sections[i], i);
+                    // }, i * 1500);
                     deferred.promise();
                     getArr.push(deferred);
                 })(i);
@@ -95,22 +104,20 @@ function jsonpResponse(response){}
     // A function assigned to a variable for performing the necessary ajax call to retrieve tags based on date.
     var getTags = function(date, section)
     {
+        window.jsonpCallbacks['callback' + section] = function(response){
+            window.jsonpCallback(response, date, section);
+        };
         var jqxr = $.ajax(
             'app_dev.php/filter_tags/' + date,
             {
                 dataType: 'jsonp',
-                // The jsonp callback wrapping the response.
-                jsonpCallback: 'jsonpResponse',
+                // The dynamic jsonp callback wrapping the response. Unusually by definining ajax call specific jsonp callbacks, the relative callback is always called. This is only necessary performing an ajax call within a loop to simulate multiple requests.
+                jsonpCallback: 'window.jsonpCallbacks.callback' + section,
                 async: true,
-                crossDomain: true
             }
         ).done(function(response){
+            // This doesn't appear to be called due to jQuery complaining that the jsonp callback wasn't called, even though it is?...
         }).always(function(response, status, jqxr){
-            cache[section] = new Array();
-            cache[section]['date'] = date;
-            cache[section]['section'] = section;
-            cache[section]['tags'] = response;
-            getArr[section].resolve();
         });
     }
 
