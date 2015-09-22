@@ -108,7 +108,7 @@ window.jsonpCallbacks = {};
             window.jsonpCallback(response, date, section);
         };
         var jqxr = $.ajax(
-            'app_dev.php/filter_tags/' + date,
+            'app.php/filter_tags/' + date,
             {
                 dataType: 'jsonp',
                 // The dynamic jsonp callback wrapping the response. Unusually by definining ajax call specific jsonp callbacks, the relative callback is always called. This is only necessary performing an ajax call within a loop to simulate multiple requests.
