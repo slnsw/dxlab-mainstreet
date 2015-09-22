@@ -147,7 +147,7 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 		
 		#sydney div.eighty img,#tweed div.eighty img
 		{
-		width: 100% !important; /*shows the full image but will cause some to be stretched*/
+		/*width: 100% !important; shows the full image but will cause some to be stretched*/
 		
 		/*width: auto!important; /*shows the image in proportion to height, but will cause some to be cropped,others with white space trialling for Chrome and Safari below*/
 		}
@@ -177,11 +177,13 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 		{
 		visibility: visible;
 		position: absolute;
+		left: 8px;
 	top: 90%;
 		}
 		#sydney div.eighty a:hover img.sydicon
 		{
 		visibility: visible;
+		left: 8px;
 		position: absolute;
 	top: 5%;
 		}
@@ -231,7 +233,7 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 			color:#000;
 			z-index:12;
 			padding: 10px 10px 0px 10px;
-			width: auto;
+			width: 100%;
 			float: left;
 			opacity:0;
 			-webkit-transition: none;
@@ -245,7 +247,7 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
  #tweed div.eighty img.twicon, img.twicon
 {	
 	visibility: hidden;
-	
+	position: absolute;/* this is required!!! because hover state is positioned. else images move*/
 	left: 8px;
 	width: 18px !important;
 	height: 18px !important;
@@ -260,7 +262,7 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 	 #sydney div.eighty img.sydicon, img.sydicon
 {	
 	visibility: hidden;
-	
+	position: absolute;/* this is required!!! because hover state is positioned. else images move*/
 	left: 8px;
 	width: 18px !important;
 	height: 18px !important;
@@ -273,14 +275,14 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 		
 img.placeholder 
 {
-	opacity: 1;
-	margin: -21px 0 0 -12px;
+	opacity: 0;
+	
 }
 
 div.eighty img.placeholder 
 {
 	opacity: 0;
-	margin: -21px 0 0 -12px;
+	
 }
 
 #title-center{
@@ -373,7 +375,7 @@ min-height: 170px;
 	img.placeholder 
 {
 	opacity: 0;
-	margin: -21px 0 0 -12px;
+	
 }
 }
 		
