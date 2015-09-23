@@ -105,7 +105,7 @@ class Trove
 
     public static function extractCommonWords($string, $limit = 10)
     {
-      $stopWords = array('i','a','about','an','and','are','as','at','be','by','com','de','en','for','from','how','in','is','it','la','of','on','or','that','the','this','to','was','what','when','where','who','will','with','und','the','www');
+      $stopWords = array('i','a','about','an','and','are','as','at','be','by','com','de','en','for','from','how','in','is','it','la','of','on','or','that','the','this','to','was','what','when','where','who','will','with','und','the','www', 'which', 'were', 'we\'re');
 
       $string = strip_tags($string);
       $string = preg_replace('/\s\s+/i', '', $string); // replace whitespace
