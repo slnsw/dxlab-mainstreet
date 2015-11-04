@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
  
- 
+/*testing git - adding this comment 20 October 2015*/ 
  
 @font-face {
 font-family: Akzidenz-Grotesk;
@@ -31,16 +31,27 @@ body {
 	letter-spacing:0.02em;
 	background-color: #fff;
 	line-height:1.3em;
+	margin: 0;
+	padding: 0;
 	
 }
+a {text-decoration:none;}
+
 #menu {float: right;
 margin: 10px;
 }
 #menu h3{float: left;
 margin: 0 20px;
 }
-#menu .info {width: 18px !important;
+#menu h3 a{text-decoration: none;
+color: #000;
+}
+#menu h3 a:hover, #menu h3 a:active, #menu h3 a:focus {text-decoration: none;
+color: #666;
+}
+#menu .info, #infolayer .info {width: 18px !important;
 	height: 18px !important;}
+
 h1, h3 {
 	/*font-family: "AkzidGroBQLig",sans-serif; font-weight:light;*/
 	font-family: "norwester",sans-serif; font-weight:normal;
@@ -51,22 +62,23 @@ h2 {padding: 0 0 0 5px;}
 strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}	
 
 
-#pagewrapper {position:absolute;
+#pagewrapper {
+	position:absolute;
 	left: 0px;
+	top: 5%;
 	width: 100%;
-	height:100%;}
+	height:95%;}
+	
 #tweed{
 	width: 100%;
 	height: 35%;
 	/*border: solid 1px #eee;*/
 	position:relative;
 	left: 0px;
-	top:4%;
+	top:0;
 	overflow: hidden;
+	}
 	
-	
-	
-}
 	#tweed div {
 		/*border: solid 1px #666;*/
 		border: 0;
@@ -91,7 +103,7 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 	position:relative;
 	left: 0px;
 	/*bottom:4%;*/
-	top: 25%;
+	top: 0;
 	overflow: hidden;
 	
 	}
@@ -120,31 +132,23 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 		padding:0;
 		margin:0;
 		height: 100% !important;
+		border: 0;
 		}
 	
 		#sydney div.eighty, #tweed div.eighty
 		{
 		/* css transitions only work with a numeric value % or px*/		
 		width: auto;
-		border-left: solid 1px #fff;
-		border-right: solid 1px #fff;
-		border-top: 0;
-		border-bottom: 0;
 		
+		border: 0;
 		/*width: 22%;*/
 		overflow:hidden;
-	
-		
-		
-		/*border: solid 1px #c03;*/
-		
-		
 		}
 		
 		
 		#sydney div.eighty img,#tweed div.eighty img
 		{
-		width: 100% !important; /*shows the full image but will cause some to be stretched*/
+		/*width: 100% !important; shows the full image but will cause some to be stretched*/
 		
 		/*width: auto!important; /*shows the image in proportion to height, but will cause some to be cropped,others with white space trialling for Chrome and Safari below*/
 		}
@@ -170,14 +174,21 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 			
 			}
 		
-		#sydney div.eighty a:hover img.icon, #tweed div.eighty a:hover img.icon
+		#tweed div.eighty a:hover img.twicon
 		{
 		visibility: visible;
+		position: absolute;
+		left: 8px;
+	top: 90%;
 		}
-		
-		
-		
-		
+		#sydney div.eighty a:hover img.sydicon
+		{
+		visibility: visible;
+		left: 8px;
+		position: absolute;
+	top: 5%;
+		}
+	
 		#tweed div.eighty a div.moreinfo, #tweed div.eighty a:visited div.moreinfo 
 		{
 			position: absolute;
@@ -223,42 +234,36 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 			color:#000;
 			z-index:12;
 			padding: 10px 10px 0px 10px;
-			width: auto;
+			width: 100%;
 			float: left;
 			opacity:0;
 			-webkit-transition: none;
   			-moz-transition: none;
   			-o-transition: none;
   			transition: none;
-			
-			
 			}
 			
-			
-img.icon, #tweed div.eighty img.icon 
+	
+
+ #tweed div.eighty img.twicon, img.twicon
 {	
 	visibility: hidden;
-	position: relative;
-	top: 90%;
+	position: absolute;/* this is required!!! because hover state is positioned. else images move*/
 	left: 8px;
 	width: 18px !important;
 	height: 18px !important;
 	-webkit-transition: none;
   			-moz-transition: none;
   			-o-transition: none;
-  			transition: none;
-			
-			
+  			transition: none;		
 	z-index:15;
 	
 	}
 	
-	#sydney div.eighty img.icon
+	 #sydney div.eighty img.sydicon, img.sydicon
 {	
 	visibility: hidden;
-	position: relative;
-
-	top: 5%;
+	position: absolute;/* this is required!!! because hover state is positioned. else images move*/
 	left: 8px;
 	width: 18px !important;
 	height: 18px !important;
@@ -266,135 +271,66 @@ img.icon, #tweed div.eighty img.icon
   			-moz-transition: none;
   			-o-transition: none;
   			transition: none;
-			
-			
 	z-index:15;
-	
 	}	
 		
 img.placeholder 
 {
-	opacity: 1;
-	margin: -21px 0 0 -12px;
+	opacity: 0;
+	
 }
+
 div.eighty img.placeholder 
 {
 	opacity: 0;
-	margin: -21px 0 0 -12px;
+	
 }
 
 #title-center{
 	position:absolute;
-	top: 39%;
-	width: 99%;
+	top: 35%;
+	width: 100%;
 	height:21%;
+	min-height: 170px;
 	}
 	
 	#title-center h1 {
-		text-align: center;
-		font-size:15em;
-		letter-spacing:0.3em;
-		padding: 0;
-		line-height:normal;
-		margin: auto;
-		z-index: 20;
-		
+	font-size: 4em;
+    height: 100%;
+    letter-spacing: 0.1em;
+    line-height: 0;
+    margin: 0 auto;
+    padding: 0 0 0 0.1em;
+    position: relative;
+    text-align: center;
+    top: 50%;
+    z-index: 20;
 		}
-
-#trove, #tags{
-clear: left;
-height:100%;
-}
-#trove{
-position: absolute;
-top: 38%;
-z-index: 1000;
-overflow: visible;
-height:22%;
-}
-
-#tags div{
-	text-align: center;
-	/*all these styles do nothing
-	position:static;
-	vertical-align:middle;
-	display:inline;
-	float: left;
-	width: auto;
-	*/
-	
-}
-.tag>div {vertical-align:middle; margin: auto;}
-#tags .trove-35{
-	position: relative;
-	float: left;
-	height:100%;
-	margin: 50% 0;
-	vertical-align:middle;
-	
-	
-	/* SYDNEY */
-}
-#tags .trove-35>span{
-	width:auto;
-	display:inline-block;
-	
-	/* SYDNEY */
-}
+		
 
 
-#tags .trove-35 a{
-	color:#642725;
-	/* SYDNEY */
-}
-#tags .trove-1007{
-	position: absolute;
-	top: 10%;
-	clear: left;
-	height: 100%
-	
-	/* TWEED */
-}
-#tags .trove-1007 a{
-	color: #A4B3B8;
-	/* TWEED */
-}
 
-#tags .loading{
-	background: transparent url("ajax-loader.gif") 50% 50% no-repeat;
-	min-height: 20px
-}
 
-#tags .tag{
-	/*background-color: #d3d3d3;*/
-	opacity: 0.1;
-	float: left;
-	width: 9%;
-	height: 100%;
-	border: solid 1px #c03;
-	position:relative;
-	
-	
-	
-}
-
-/*=======*/
+/*====TROVE DATA ===*/
 #tags-wrapper h2{
 	position: fixed;
-	top: 0;
+	top: -10px;
 	width: 100%;
 	text-align: center;
+	width: 20%;
+	margin: 20px 40%;
 }
 #tags-wrapper{
 	
 	
-	position: absolute;
-top: 39%;
+	position: relative;
+top: 0;
 width: 100%;
 overflow: hidden;
 height:21%;
 text-align: center;
 z-index: 100;
+min-height: 170px;
 
 }
 
@@ -405,9 +341,9 @@ z-index: 100;
 
 #tags-wrapper-inner {line-height: inherit; height: 100%;}
 
-#tags-wrapper .trove-1007 {position: relative; top: 10%;height: 50%;overflow: hidden;}
-#tags-wrapper .trove-35 {position: relative; top: 10%;height: 50%;}
-#tags-wrapper .trove-35 span, #tags-wrapper .trove-1007 span{position: relative; top: 0;height: 100%; line-height:80%;
+#tags-wrapper .trove-1007 {position: absolute; top: 3%;height: 50%;overflow: hidden; width: 100%;}
+#tags-wrapper .trove-35 {position: absolute; top: 63%;height: 50%;width: 100%;}
+#tags-wrapper .trove-35 span, #tags-wrapper .trove-1007 span{position: relative; top: 0;height: 100%; line-height:100%;
 }
 
 #tags-wrapper .trove-35 span>a{
@@ -423,12 +359,14 @@ z-index: 100;
 
 #tags-wrapper .trove-1007 span>a{
 	color: #A4B3B8;
-	text-decoration:none;
+	
 }
 #tags-wrapper .trove-1007 span>a:hover, #tags-wrapper .trove-1007 span>a:active, #tags-wrapper .trove-1007 span>a:focus {
 	color: #646D6D;
-	text-decoration:none;
+	
 }
+/*====END TROVE DATA ===*/
+
 /* for safari */
 		@media screen and (-webkit-min-device-pixel-ratio:0) { 
 
@@ -438,19 +376,84 @@ z-index: 100;
 	img.placeholder 
 {
 	opacity: 0;
-	margin: -21px 0 0 -12px;
-}
-}
-		/* for safari and chrome*/
-		@media screen and (-webkit-min-device-pixel-ratio:0) { 
-
-    #sydney div.eighty img,#tweed div.eighty img {
-        width: auto!important; 
-    }
-	img.placeholder 
-{
-	visibility: hidden;
-	margin: -21px 0 0 -12px;
+	
 }
 }
 		
+		
+	#infolayer {
+    z-index: 2000;
+	font-family: AkzidGroBQLig;
+	background-color: #fff;
+    color: #555;
+    height: auto;
+    left: 20%;
+    opacity: 0.95;
+    position: absolute;
+    
+	
+	left: 12%;
+    top: 7%;
+    width: 75%;
+		
+		}
+		
+	#infolayer.infolayer-off{
+		display: none;
+		}
+	#infolayer.infolayer-on{
+		display: block;
+		}
+	#infolayer a{
+			color: #ed0180;
+		}
+	.about {
+    padding: 20px;
+	}
+	.closewindow {padding: 15px 0 0 15px;}
+
+.about .about-left {
+   
+    display: inline-block;
+    line-height: 1.4em;
+    padding: 0 15px;
+    vertical-align: top;
+    width: auto;
+}
+.about .about-right {
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 900;
+    text-align: right;
+    width: 100%;
+}
+.about .about-right .about-logo {
+    margin-bottom: 84px;
+    margin-top: 27px;
+}
+.about .about-right {
+    font-size: 12px;
+    font-weight: 900;
+    text-align: right;
+}
+.about .about-right .about-logo #dx-logo {
+    /*filter: invert(100%);*/
+    margin: 0 12px;
+    vertical-align: 0;
+    width: 122px;
+}
+.about .about-right .about-logo #sl-logo {
+    margin-left: calc(20% - 53px);
+    margin-left: 15px;
+    margin-right: 15px;
+    vertical-align: -8px;
+    width: 107px;
+	filter: invert(100%);
+	    -webkit-filter: invert(100%);
+}
+.about .about-right .about-logo {
+    margin-bottom: 84px;
+    margin-top: 27px;
+	text-align:center;
+}
