@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* CSS Document */
  
+/*testing git - adding this comment 20 October 2015*/ 
+/*checking update*/
+/* testing ruth*/
 @font-face {
 font-family: Akzidenz-Grotesk;
 src: url("../font/akzid/AkzidGroBQReg.otf") format("opentype");
@@ -51,6 +54,7 @@ color: #666;
 	height: 18px !important;}
 
 h1, h3 {
+	/*font-family: "AkzidGroBQLig",sans-serif; font-weight:light;*/
 	font-family: "norwester",sans-serif; font-weight:normal;
 	
 }
@@ -69,6 +73,7 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 #tweed{
 	width: 100%;
 	height: 35%;
+	/*border: solid 1px #eee;*/
 	position:relative;
 	left: 0px;
 	top:0;
@@ -76,36 +81,53 @@ strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}
 	}
 	
 	#tweed div {
+		/*border: solid 1px #666;*/
 		border: 0;
 		float:left;
 		height:100%;
 		width: 1%;
 		margin: 0 0px 0 0;
 		overflow: hidden;
+		/*-webkit-transition: all 2s ease;
+  		-moz-transition: all 2s ease;
+  		-o-transition: all 2s ease;
+  		transition: all 2s ease;*/
+		
 		position:relative;
+		
 		}
 
 #sydney{
 	width: 100%;
 	height: 35%;
+	/*border: solid 1px #ccc;*/
 	position:relative;
 	left: 0px;
+	/*bottom:4%;*/
 	top: 0;
 	overflow: hidden;
 	
 	}
 	
 	#sydney div {
+		/*border: solid 1px #666;*/
 		border: 0;
 		float:left;
 		height:100%;
 		width: 1%;
 		margin: 0 0px 0 0;
 		overflow: hidden;
+		/*-webkit-transition: all 2s ease;
+  		-moz-transition: all 2s ease;
+  		-o-transition: all 2s ease;
+  		transition: all 2s ease;*/
+		
 		position:relative;
+		
 		}
 		
 		img{
+		/*width: 25%; height: 25%;*/
 		position: relative;
 		z-index: 2;
 		padding:0;
@@ -275,7 +297,7 @@ div.eighty img.placeholder
 	
 	#title-center h1 {
 	font-size: 4em;
-    /*height: 100%; removing for ie 11*/
+    height: 100%;
     letter-spacing: 0.1em;
     line-height: 0;
     margin: 0 auto;
