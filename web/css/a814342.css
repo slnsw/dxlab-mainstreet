@@ -1,0 +1,535 @@
+@charset "UTF-8";
+/* CSS Document */
+ 
+@font-face {
+font-family: Akzidenz-Grotesk;
+src: url("../bundles/sldataharvest/font/akzid/AkzidGroBQReg.otf") format("opentype");
+}
+
+@font-face {
+font-family: Akzidenz-Grotesk;
+font-weight: bold;
+src: url("../bundles/sldataharvest/font/akzid/AkzidGroBQBol.otf") format("opentype");
+}
+@font-face {
+font-family: AkzidGroBQLig;
+font-weight: light;
+src: url("../bundles/sldataharvest/font/akzid/AkzidGroBQLig.otf") format("opentype");
+}
+@font-face {
+font-family: norwester;
+font-weight: normal;
+src: url("../bundles/sldataharvest/font/norwester/norwester.otf") format("opentype");
+}
+
+
+body {
+	font-family: "norwester",sans-serif; font-weight:normal;letter-spacing: 0.02em;
+	font-size: 0.8em;
+	letter-spacing:0.02em;
+	background-color: #fff;
+	line-height:1.3em;
+	margin: 0;
+	padding: 0;
+	
+}
+a {text-decoration:none;}
+
+#menu {float: right;
+margin: 10px;
+}
+#menu h3{float: left;
+margin: 0 20px;
+}
+#menu h3 a{text-decoration: none;
+color: #000;
+}
+#menu h3 a:hover, #menu h3 a:active, #menu h3 a:focus {text-decoration: none;
+color: #666;
+}
+#menu .info, #infolayer .info {width: 18px !important;
+	height: 18px !important;}
+
+h1, h3 {
+	font-family: "norwester",sans-serif; font-weight:normal;
+	
+}
+h2 {padding: 0 0 0 5px;}
+
+strong{font-family: "Akzidenz-Grotesk",sans-serif; font-weight:bold;}	
+
+
+#pagewrapper {
+	position:absolute;
+	left: 0px;
+	top: 5%;
+	width: 100%;
+	height:95%;}
+	
+#tweed{
+	width: 100%;
+	height: 35%;
+	position:relative;
+	left: 0px;
+	top:0;
+	overflow: hidden;
+	}
+	
+	#tweed div {
+		border: 0;
+		float:left;
+		height:100%;
+		width: 1%;
+		margin: 0 0px 0 0;
+		overflow: hidden;
+		position:relative;
+		}
+
+#sydney{
+	width: 100%;
+	height: 35%;
+	position:relative;
+	left: 0px;
+	top: 0;
+	overflow: hidden;
+	
+	}
+	
+	#sydney div {
+		border: 0;
+		float:left;
+		height:100%;
+		width: 1%;
+		margin: 0 0px 0 0;
+		overflow: hidden;
+		position:relative;
+		}
+		
+		img{
+		position: relative;
+		z-index: 2;
+		padding:0;
+		margin:0;
+		height: 100% !important;
+		border: 0;
+		}
+	
+		#sydney div.eighty, #tweed div.eighty
+		{
+		/* css transitions only work with a numeric value % or px*/		
+		width: auto;
+		
+		border: 0;
+		/*width: 22%;*/
+		overflow:hidden;
+		}
+		
+		
+		#sydney div.eighty img,#tweed div.eighty img
+		{
+		/*width: 100% !important; shows the full image but will cause some to be stretched*/
+		
+		/*width: auto!important; /*shows the image in proportion to height, but will cause some to be cropped,others with white space trialling for Chrome and Safari below*/
+		}
+		
+		
+		
+		#sydney div a div.moreinfo, #tweed div a div.moreinfo
+		{
+		visibility: hidden;
+		}
+		#sydney div a div.moreinfo-on, #tweed div a div.moreinfo-on
+		{
+		visibility: visible;
+		}
+		#sydney div.eighty a div.moreinfo-on div, #tweed div.eighty a div.moreinfo-on div
+			{
+			opacity:1!important;
+	
+			-webkit-transition: none;
+  			-moz-transition: none;
+  			-o-transition: none;
+  			transition: none;
+			
+			}
+		
+		#tweed div.eighty a:hover img.twicon
+		{
+		visibility: visible;
+		position: absolute;
+		left: 8px;
+	top: 90%;
+		}
+		#sydney div.eighty a:hover img.sydicon
+		{
+		visibility: visible;
+		left: 8px;
+		position: absolute;
+	top: 5%;
+		}
+	
+		#tweed div.eighty a div.moreinfo, #tweed div.eighty a:visited div.moreinfo 
+		{
+			position: absolute;
+			bottom: 0px;
+			left: auto;
+			right: auto;
+			width: 100%;
+			height:auto;
+			overflow:visible;
+			
+			background-color:#fff;
+			background-size:cover;
+			z-index:10;
+			opacity: 0.6;
+			-webkit-transition: none;
+  			-moz-transition: none;
+  			-o-transition: none;
+  			transition: none;
+			}
+			#sydney div.eighty a div.moreinfo, #sydney div.eighty a:visited div.moreinfo
+		{
+			position: absolute;
+			top: 0px;
+			left: auto;
+			right: auto;
+			width: 100%;
+			height:auto;
+			overflow:visible;
+			
+			background-color:#fff;
+			background-size:cover;
+			z-index:10;
+			opacity: 0.6;
+			-webkit-transition: none;
+  			-moz-transition: none;
+  			-o-transition: none;
+  			transition: none;
+			}
+			
+			#sydney>div>a>div.moreinfo div, #tweed>div>a>div.moreinfo div
+			{
+			visibility: visible;
+			color:#000;
+			z-index:12;
+			padding: 10px 10px 0px 10px;
+			width: 100%;
+			float: left;
+			opacity:0;
+			-webkit-transition: none;
+  			-moz-transition: none;
+  			-o-transition: none;
+  			transition: none;
+			}
+			
+	
+
+ #tweed div.eighty img.twicon, img.twicon
+{	
+	visibility: hidden;
+	position: absolute;/* this is required!!! because hover state is positioned. else images move*/
+	left: 8px;
+	width: 18px !important;
+	height: 18px !important;
+	-webkit-transition: none;
+  			-moz-transition: none;
+  			-o-transition: none;
+  			transition: none;		
+	z-index:15;
+	
+	}
+	
+	 #sydney div.eighty img.sydicon, img.sydicon
+{	
+	visibility: hidden;
+	position: absolute;/* this is required!!! because hover state is positioned. else images move*/
+	left: 8px;
+	width: 18px !important;
+	height: 18px !important;
+	-webkit-transition: none;
+  			-moz-transition: none;
+  			-o-transition: none;
+  			transition: none;
+	z-index:15;
+	}	
+		
+img.placeholder 
+{
+	opacity: 0;
+	
+}
+
+div.eighty img.placeholder 
+{
+	opacity: 0;
+	
+}
+
+#title-center{
+	position:absolute;
+	top: 35%;
+	width: 100%;
+	height:21%;
+	min-height: 170px;
+	}
+	
+	#title-center h1 {
+	font-size: 4em;
+    /*height: 100%; removing for ie 11*/
+    letter-spacing: 0.1em;
+    line-height: 0;
+    margin: 0 auto;
+    padding: 0 0 0 0.1em;
+    position: relative;
+    text-align: center;
+    top: 50%;
+    z-index: 20;
+		}
+		
+
+
+
+
+/*====TROVE DATA ===*/
+#tags-wrapper h2{
+	position: fixed;
+	top: -10px;
+	width: 100%;
+	text-align: center;
+	width: 20%;
+	margin: 20px 40%;
+}
+#tags-wrapper{
+	
+	
+	position: relative;
+top: 0;
+width: 100%;
+overflow: hidden;
+height:21%;
+text-align: center;
+z-index: 100;
+min-height: 170px;
+
+}
+
+#tags-wrapper h1{
+	text-align: center;
+	font-size: 2em;
+}
+
+#tags-wrapper-inner {line-height: inherit; height: 100%;}
+
+#tags-wrapper .trove-1007 {position: absolute; top: 3%;height: 50%;overflow: hidden; width: 100%;}
+#tags-wrapper .trove-35 {position: absolute; top: 63%;height: 50%;width: 100%;}
+#tags-wrapper .trove-35 span, #tags-wrapper .trove-1007 span{position: relative; top: 0;height: 100%; line-height:100%;
+}
+
+#tags-wrapper .trove-35 span>a{
+	color: #3d3338;
+	text-decoration:none;
+	
+}
+#tags-wrapper .trove-35 span>a:hover, #tags-wrapper .trove-35 span>a:active, #tags-wrapper .trove-35 span>a:focus{
+	color: #662F2C;
+	text-decoration:none;
+	
+}
+
+#tags-wrapper .trove-1007 span>a{
+	color: #A4B3B8;
+	
+}
+#tags-wrapper .trove-1007 span>a:hover, #tags-wrapper .trove-1007 span>a:active, #tags-wrapper .trove-1007 span>a:focus {
+	color: #646D6D;
+	
+}
+/*====END TROVE DATA ===*/
+
+/* for safari */
+		@media screen and (-webkit-min-device-pixel-ratio:0) { 
+
+    #sydney div.eighty img,#tweed div.eighty img {
+        width: auto!important; 
+    }
+	img.placeholder 
+{
+	opacity: 0;
+	
+}
+}
+		
+		
+	#infolayer {
+    z-index: 2000;
+	font-family: AkzidGroBQLig;
+	background-color: #fff;
+    color: #555;
+    height: auto;
+    left: 20%;
+    opacity: 0.95;
+    position: absolute;
+    
+	
+	left: 12%;
+    top: 7%;
+    width: 75%;
+		
+		}
+		
+	#infolayer.infolayer-off{
+		display: none;
+		}
+	#infolayer.infolayer-on{
+		display: block;
+		}
+	#infolayer a{
+			color: #ed0180;
+		}
+	.about {
+    padding: 20px;
+	}
+	.closewindow {padding: 15px 0 0 15px;}
+
+.about .about-left {
+   
+    display: inline-block;
+    line-height: 1.4em;
+    padding: 0 15px;
+    vertical-align: top;
+    width: auto;
+}
+.about .about-right {
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 900;
+    text-align: right;
+    width: 100%;
+}
+.about .about-right .about-logo {
+    margin-bottom: 84px;
+    margin-top: 27px;
+}
+.about .about-right {
+    font-size: 12px;
+    font-weight: 900;
+    text-align: right;
+}
+.about .about-right .about-logo #dx-logo {
+    /*filter: invert(100%);*/
+    margin: 0 12px;
+    vertical-align: 0;
+    width: 122px;
+}
+.about .about-right .about-logo #sl-logo {
+    margin-left: calc(20% - 53px);
+    margin-left: 15px;
+    margin-right: 15px;
+    vertical-align: -8px;
+    width: 107px;
+	filter: invert(100%);
+	    -webkit-filter: invert(100%);
+}
+.about .about-right .about-logo {
+    margin-bottom: 84px;
+    margin-top: 27px;
+	text-align:center;
+}
+
+@charset "UTF-8";
+/* CSS Document */
+
+		@media (min-width: 500px)  {
+  
+#title-center h1 {
+font-size: 6em;
+
+}
+
+		@media (min-width: 670px)  {
+  
+#title-center h1 {
+font-size: 8em;
+
+}
+.about .about-left {
+width: calc(60% - 50px);
+}
+.about .about-right {
+width: calc(40%);
+}
+
+		@media (min-width: 785px)  {
+  
+#title-center h1 {
+/*font-size: 8em;*/
+letter-spacing: 0.2em;
+padding: 0 0 0 0.2em;
+}
+
+		@media (min-width: 900px)  {
+  
+#title-center h1 {
+	letter-spacing: 0.3em;
+	padding: 0 0 0 0.3em;
+}
+		}
+		@media (min-width: 1015px)  {
+  
+#title-center h1 {font-size: 9em;
+}
+		}
+		@media (min-width: 1100px)  {
+  
+#infolayer {
+    left: 15%;
+    top: 10%;
+    width: 70%;
+		
+	}
+	
+
+		}
+
+		@media (min-width: 1125px)  {
+  
+#title-center h1 {font-size: 10em;
+}
+		}
+		
+		@media (min-width: 1235px)  {
+			
+		}
+		
+		@media (min-width: 1350px)  {
+  
+#title-center h1 {font-size: 12em;
+}
+
+#infolayer {
+    left: 20%;
+    top: 15%;
+    width: 60%;
+		
+	}
+	
+.about .about-left {
+    width: calc(50% - 50px);
+}
+.about .about-right {
+    width: calc(50% - 50px);
+}
+.about .about-right .about-logo #sl-logo {
+    margin-left: calc(25% - 53px);
+    
+}
+		}
+
+		@media (min-width: 1700px)  {
+  
+#title-center h1 {font-size: 15em;
+}
+		}
+		
+		

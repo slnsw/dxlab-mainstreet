@@ -1,3 +1,38 @@
+
+NOTE: Site migrate to new server late Jan 2018 - new server is NGINX so .htaccess files don't work
+Also note sim links need to be created in:
+
+/srv/www/wp.dxlab.sl.nsw.gov.au/shared/experiments/mainstreet/web/bundles
+
+they are:
+
+framework -> ../../vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/public/
+sensiodistribution -> ../../vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/public/
+sldataharvest -> ../../src/SL/DataHarvestBundle/Resources/public/ 
+
+and
+/srv/www/wp.dxlab.sl.nsw.gov.au/shared/experiments/mainstreet/bin
+
+they are:
+
+doctrine -> ../vendor/doctrine/orm/bin/doctrine
+doctrine.php -> ../vendor/doctrine/orm/bin/doctrine.php
+security-checker -> ../vendor/sensiolabs/security-checker/security-checker
+
+To avoid some issues with non-https access of SLNSW images from the ACMS site we copied the images onto the server and updated the XML file SLNSWMainStreets.xml which lives in /srv/www/wp.dxlab.sl.nsw.gov.au/shared/experiments/mainstreet/web/bundles/sldataharvest/xml to have relative paths to the local images instead of URLs to the ACMS site.
+
+The images live in a folder called acms which lives in /srv/www/wp.dxlab.sl.nsw.gov.au/shared/experiments/mainstreet/web
+
+The site only seems to work with this URL: dxlab.sl.nsw.gov.au/mainstreet/web/app.php rather than the dxlab.sl.nsw.gov.au/mainstreet/ or dxlab.sl.nsw.gov.au/mainstreet/web/ 
+So we also two index.php files in those location which re-direct to dxlab.sl.nsw.gov.au/mainstreet/web/app.php
+
+Lastly the lack of .htaccess files seems to stop some ajax calls to Trove from working meaning the tags that normally appear in the middle of the page do not show up. This seems to be because URLs of this form do not work: 
+
+https://dxlab.sl.nsw.gov.au/mainstreet/web/app.php/filter_tags/1887?callback=window.jsonpCallbacks.callback2&_=1517452960459
+
+Not sure how to fix this right now.
+
+
 Symfony Standard Edition
 ========================
 
