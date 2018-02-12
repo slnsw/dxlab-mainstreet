@@ -1,5 +1,7 @@
 
-NOTE: Site migrate to new server late Jan 2018 - new server is NGINX so .htaccess files don't work
+# NOTE
+
+Site migrate to new server late Jan 2018 - new server is NGINX so .htaccess files don't work
 Also note sim links need to be created in:
 
 /srv/www/wp.dxlab.sl.nsw.gov.au/shared/experiments/mainstreet/web/bundles
@@ -31,6 +33,12 @@ Lastly the lack of .htaccess files seems to stop some ajax calls to Trove from w
 https://dxlab.sl.nsw.gov.au/mainstreet/web/app.php/filter_tags/1887?callback=window.jsonpCallbacks.callback2&_=1517452960459
 
 Not sure how to fix this right now.
+
+## More notes (Feb 2018):
+Replaced insecure JS src on server here:
+app/cache/prod/twig/5/8/586bec3f45187935752d6b384cf0b9c07b1c3703e7aac9728c799f37f34b5350.php
+This file is not in the repo as it is generated.
+However this is the template file: src/SL/DataHarvestBundle/Resources/views/Default/base.html.twig, which has been updated.
 
 
 Symfony Standard Edition
